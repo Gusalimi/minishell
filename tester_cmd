@@ -1,0 +1,1 @@
+python3 -m minishell_test > test ; sed '/;/d' test > test_filtered ; sed '/\[PASS\]/d' test_filtered > test_filtered_only_fail

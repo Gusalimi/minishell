@@ -1,55 +1,75 @@
 NAME	= minishell
 
-SRCS	=	parsing/parse_line.c \
-			parsing/is_line_valid.c \
-			parsing/is_line_valid2.c \
-			parsing/is_line_valid3.c \
-			parsing/get_cmd_args.c \
-			parsing/get_next_arg.c \
-			parsing/parsing_utils.c \
-			parsing/parsing_utils2.c \
-			parsing/parsing_utils3.c \
-			parsing/parsing_utils4.c \
-			parsing/parsing_utils5.c \
-			parsing/parsing_utils6.c \
-			parsing/get_cmd_path.c \
-			parsing/init_cmd_iostream.c \
-			parsing/handle_here_doc.c \
-			parsing/is_number_valid.c \
-			parsing/ft_split_is_space.c \
-			parsing/finish_parsing.c \
-			parsing/replace_env_variable.c \
+SRCS	=	srcs/parsing/parse_line.c \
+			srcs/parsing/is_line_valid.c \
+			srcs/parsing/is_line_valid2.c \
+			srcs/parsing/is_line_valid3.c \
+			srcs/parsing/get_cmd_args.c \
+			srcs/parsing/get_next_arg.c \
+			srcs/parsing/parsing_utils.c \
+			srcs/parsing/parsing_utils2.c \
+			srcs/parsing/parsing_utils3.c \
+			srcs/parsing/parsing_utils4.c \
+			srcs/parsing/parsing_utils5.c \
+			srcs/parsing/parsing_utils6.c \
+			srcs/parsing/parsing_utils7.c \
+			srcs/parsing/get_cmd_path.c \
+			srcs/parsing/init_cmd_iostream.c \
+			srcs/parsing/handle_here_doc.c \
+			srcs/parsing/is_number_valid.c \
+			srcs/parsing/ft_split_is_space.c \
+			srcs/parsing/finish_parsing.c \
+			srcs/parsing/replace_env_variable.c \
+			srcs/parsing/replace_arg.c \
+			srcs/parsing/get_quotes_pos.c \
+			srcs/parsing/get_updated_args.c \
+			srcs/parsing/get_updated_args_utils.c \
+			srcs/parsing/get_updated_nb_args.c \
+			srcs/parsing/replace_var_in_quotes.c \
+			srcs/parsing/handle_ambiguous.c \
+			srcs/parsing/wildcard.c \
+			srcs/parsing/wildcard_utils.c \
+			srcs/parsing/remove_empty_args.c \
+			srcs/parsing/remove_quote_pos.c \
+			srcs/parsing/get_wildcards_pos.c \
+			srcs/parsing/expand_wildcards.c \
+			srcs/parsing/split_wildcard.c \
+			srcs/parsing/get_arg_wildcards_pos.c \
 			\
-			builtins/echo.c \
-			builtins/env.c \
-			builtins/cd.c \
-			builtins/pwd.c \
-			builtins/export.c \
-			builtins/export_utils.c \
-			builtins/export_utils2.c \
-			builtins/unset.c \
-			builtins/exit.c \
+			srcs/builtins/echo.c \
+			srcs/builtins/env.c \
+			srcs/builtins/cd.c \
+			srcs/builtins/pwd.c \
+			srcs/builtins/export.c \
+			srcs/builtins/export_utils.c \
+			srcs/builtins/export_utils2.c \
+			srcs/builtins/export_utils3.c \
+			srcs/builtins/unset.c \
+			srcs/builtins/exit.c \
+			srcs/builtins/cd_utils.c \
 			\
-			main.c \
-			init_minishell.c \
-			env_handler.c \
-			handle_cmds.c \
-			history.c \
-			last_exit_status.c \
-			in_cmd_status.c \
-			handle_redirects.c \
-			handle_redirects2.c \
-			execute_builtin.c \
-			exec_subshell.c \
-			execute_file.c \
-			start_executing_cmds.c \
-			start_pipeline.c \
-			start_pipeline_utils.c \
+			srcs/exec/main.c \
+			srcs/exec/init_minishell.c \
+			srcs/exec/env_handler.c \
+			srcs/exec/handle_cmds.c \
+			srcs/exec/history.c \
+			srcs/exec/last_exit_status.c \
+			srcs/exec/in_cmd_status.c \
+			srcs/exec/in_fork_status.c \
+			srcs/exec/handle_redirects.c \
+			srcs/exec/handle_redirects2.c \
+			srcs/exec/execute_builtin.c \
+			srcs/exec/exec_subshell.c \
+			srcs/exec/execute_file.c \
+			srcs/exec/start_executing_cmds.c \
+			srcs/exec/start_pipeline.c \
+			srcs/exec/start_pipeline_utils.c \
+			srcs/exec/shlvl.c \
 
 OBJS	= $(SRCS:.c=.o)
 RL		= -lreadline -L /Users/$$USER/.brew/opt/readline/lib 
-INC		= -I /Users/$$USER/.brew/opt/readline/include -I .
-LIBFT	= libft/libft_enhanced.a
+INC		= -I /Users/$$USER/.brew/opt/readline/include -I includes
+LIBFT	= srcs/libft/libft_enhanced.a
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror -g3
 
@@ -67,15 +87,15 @@ debug:	$(OBJS) $(LIBFT)
 
 $(LIBFT):
 	@echo libft compiled
-	@$(MAKE) -C libft
+	@$(MAKE) -C srcs/libft
 
 clean:
 	$(RM) $(OBJS)
-	$(MAKE) clean -C libft
+	$(MAKE) clean -C srcs/libft
 
 fclean:	clean
 	$(RM) $(NAME)
-	$(MAKE) fclean -C libft
+	$(MAKE) fclean -C srcs/libft
 
 re:	fclean all
 
